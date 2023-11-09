@@ -1,0 +1,23 @@
+.nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1em;
+}
+
+.logo,
+.links {
+    display: flex;
+    font-size: 1.3em;
+    align-items: center;
+
+}
+
+.links a {
+    margin: 0 5px;
+    text-decoration: none;
+    color: var(--medium);
+}
+
+.links a:hover {
+    color: var(--light);
+}
