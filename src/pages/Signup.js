@@ -15,30 +15,35 @@ export default function Signup() {
 
   return (
     <form onSubmit={handleSubmit} className={formStyles.form}>
-      
+
       <h2>Signup</h2>
 
       <div className={formStyles["form-input"]}>
         <label htmlFor="username">Username:</label>
         <input
+          id="username"
           type="text"
           onChange={(e) => setUsername(e.target.value)}
           value={username}
+          autoComplete='true'
         />
       </div>
 
       <div className={formStyles["form-input"]}>
         <label htmlFor="email">Email:</label>
         <input
+          id="email"
           type="email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
+          autoComplete='true'
         />
       </div>
 
       <div className={formStyles["form-input"]}>
         <label htmlFor="password">Password:</label>
         <input
+          id="password"
           type="password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
@@ -48,6 +53,7 @@ export default function Signup() {
       <div className={formStyles["form-input"]}>
         <label htmlFor="password2">Repeat password:</label>
         <input
+          id="password2"
           type="password"
           onChange={(e) => setPassword2(e.target.value)}
           value={password2}
