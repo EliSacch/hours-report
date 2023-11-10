@@ -40,11 +40,10 @@ function App() {
           <Route path="/signup" element={<Signup />} />
         </Routes>
       </BrowserRouter>
-      { showModal && <Modal handleClose={handleClose} showModal={showModal}>
+      { showModal && <Modal handleClose={handleClose} showModal={showModal} >
         <h2>Logout</h2>
         <p>Do you want to sign out?</p>
-
-        <button onClick={handleLogout} className={styles.btn}>Confirm</button>
+        <button onClick={handleLogout} className={styles.btn} data="1">Confirm</button>
       </Modal> }
     </div>
   );
