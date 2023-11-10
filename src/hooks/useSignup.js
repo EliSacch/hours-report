@@ -1,6 +1,6 @@
 // hooks
 import { useState } from 'react';
-// cntext
+// context
 import { useAuthContext } from './useAuthContext';
 // utils
 import { validateSignupForm } from '../utils/validateSignup';
@@ -34,7 +34,6 @@ export const useSignup = () => {
             setIsPending(false);
 
         } catch (err) {
-            console.log(err.message);
             setError(err.message);
             setIsPending(false);
         }

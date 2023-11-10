@@ -4,7 +4,9 @@ import { ReactComponent as LogoSvg } from '../logo.svg';
 // style
 import styles from './styles/Navigation.module.css';
 
-export default function Navigation() {
+export default function Navigation({ handleOpen }) {
+
+
     return (
         <nav className={styles.nav}>
             <div className={styles.logo}>
@@ -14,7 +16,8 @@ export default function Navigation() {
             <div className={styles.links}>
                 <Link to="/">Home</Link>
                 <Link to="/login">Login</Link>
-                <Link to="/signup">signup</Link>
+                <Link to="/signup">Signup</Link>
+                <button onClick={handleOpen}>Sign out</button>
             </div>
         </nav>
     )

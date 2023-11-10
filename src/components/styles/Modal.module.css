@@ -1,0 +1,56 @@
+.modalbackdrop {
+    position: fixed;
+    inset: 0;
+    color: var(--dark);
+    background-color: rgba(40, 39, 42, .4);
+    isolation: isolate;
+    backdrop-filter: blur(2px);
+    z-index: 1;
+}
+
+.modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1em;
+    width: 80%;
+    max-width: 600px;
+    min-height: 20%;
+    background-color: var(--light);
+    border-radius: 5px;
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal button {
+    position: absolute;
+    top: 7px;
+    right: 10px;
+    padding: 2px;
+    background-color: transparent;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.modal button:hover > span {
+    font-weight: 900;
+    color: var(--error);
+}
+
+.modal button:focus {
+    box-shadow: none;
+    outline: 1px solid var(--medium);
+}
+
+.modal button:focus > span {
+    font-weight: 900;
+    color: var(--error);
+}
+
+.modal button > span {
+    font-size: 3em;
+}
