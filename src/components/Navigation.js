@@ -16,8 +16,8 @@ export default function Navigation({ handleOpen }) {
             <div className={styles.links}>
                 <Link to="/">Home</Link>
                 <Link to="/login">Login</Link>
-                <Link to="/signup">Signup</Link>
-                <button onClick={handleOpen}>Sign out</button>
+                <Link to="/signup">Sign up</Link>
+                <button onClick={handleOpen}>Logout</button>
             </div>
         </nav>
     )
