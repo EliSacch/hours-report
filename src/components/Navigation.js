@@ -1,6 +1,7 @@
+// components
 import { Link } from 'react-router-dom';
 import { ReactComponent as LogoSvg } from '../logo.svg';
-
+// style
 import styles from './styles/Navigation.module.css';
 
 export default function Navigation() {

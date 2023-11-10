@@ -1,16 +1,20 @@
+// hooks
 import { useState } from 'react';
+import { useSignup } from '../hooks/useSignup';
+// style
 import formStyles from './styles/Forms.module.css';
 import btnStyles from './styles/Buttons.module.css';
 
 export default function Signup() {
-  const [username, setUsername] = useState('');
+  const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
+  const { signup, isPending, error } = useSignup();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(username, email, password, password2);
+    signup(e.target, email, password, displayName);
   }
 
   return (
@@ -19,13 +23,12 @@ export default function Signup() {
       <h2>Signup</h2>
 
       <div className={formStyles["form-input"]}>
-        <label htmlFor="username">Username:</label>
+        <label htmlFor="displayName">Display Name:</label>
         <input
-          id="username"
+          id="displayName"
           type="text"
-          onChange={(e) => setUsername(e.target.value)}
-          value={username}
-          autoComplete='true'
+          onChange={(e) => setDisplayName(e.target.value)}
+          value={displayName}
         />
       </div>
 
@@ -36,7 +39,6 @@ export default function Signup() {
           type="email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
-          autoComplete='true'
         />
       </div>
 
@@ -59,8 +61,9 @@ export default function Signup() {
           value={password2}
         />
       </div>
-
-      <button id="signup" className={btnStyles.btn}>Signup</button>
+      {!isPending && <button id="signup" className={btnStyles.btn}>Signup</button>}
+      {isPending && <button className={btnStyles.btn} disabled>loading...</button>}
+      {error && <p>{error}</p>}
 
     </form>
   )
