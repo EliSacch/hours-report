@@ -15,7 +15,7 @@ export default function Modal({ children, handleClose, showModal }) {
         const exitKey = {
             ESC: 27
         };
-        if(e.keyCode == exitKey.ESC) {
+        if(e.keyCode === exitKey.ESC) {
             handleClose();
         }
     }
@@ -31,16 +31,16 @@ export default function Modal({ children, handleClose, showModal }) {
     const handleKeyDown = (e) => {
         const modal = document.getElementById("modal");
         const focusableElements = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-        if (modal !== null & e.key.toLowerCase() == "tab") {
+        if (modal !== null & e.key.toLowerCase() === "tab") {
             const target = e.target;
             const last = (focusableElements.length) - 1;
             if (e.shiftKey) {
-                if (target == focusableElements[0]) {
+                if (target === focusableElements[0]) {
                     e.preventDefault();
                     focusableElements[last].focus();
                 }
             } else {
-                if (target == focusableElements[last]) {
+                if (target === focusableElements[last]) {
                     e.preventDefault();
                     focusableElements[0].focus();
                 }

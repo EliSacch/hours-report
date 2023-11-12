@@ -1,8 +1,10 @@
 // hooks
 import { useState } from 'react';
 import { useLogout } from './hooks/useLogout';
+// auth/context
+import { useAuthContext } from './hooks/useAuthContext';
 // components
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
@@ -14,8 +16,9 @@ import styles from './components/styles/Modal.module.css';
 
 
 function App() {
+  const { authIsReady, user } = useAuthContext();
   const [showModal, setShowModal] = useState(false);
-  const { logout } = useLogout()
+  const { logout } = useLogout();
 
   const handleLogout = () => {
     setShowModal(false);
@@ -29,22 +32,30 @@ function App() {
   const handleOpen = () => {
     setShowModal(true);
   }
- 
+
   return (
     <div className="App">
-      <BrowserRouter>
-        <Navigation handleOpen={handleOpen} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
-        </Routes>
-      </BrowserRouter>
-      { showModal && <Modal handleClose={handleClose} showModal={showModal} >
-        <h2>Logout</h2>
-        <p>Do you want to sign out?</p>
-        <button onClick={handleLogout} className={styles.btn} data="1">Confirm</button>
-      </Modal> }
+      {authIsReady && (
+        <>
+          <BrowserRouter>
+            <Navigation handleOpen={handleOpen} />
+            <Routes>
+              <Route
+              path="/"
+              element={user ? <Home /> : <Navigate to="/login" />}/>
+              <Route path="/login" element={user ? <Navigate to="/" /> : <Login />} />
+              <Route path="/signup" element={user ? <Navigate to="/" /> : <Signup />} />
+            </Routes>
+          </BrowserRouter>
+          {showModal && (
+            <Modal handleClose={handleClose} showModal={showModal} >
+              <h2>Logout</h2>
+              <p>Do you want to sign out?</p>
+              <button onClick={handleLogout} className={styles.btn} data="1">Confirm</button>
+            </Modal>
+          )}
+        </>
+      )}
     </div>
   );
 }
