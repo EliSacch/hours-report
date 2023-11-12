@@ -25,3 +25,9 @@
     background-color: var(--dark);
     color: var(--light);
 }
+
+.btn:focus {
+    outline: 1px solid var(--light);
+    background-color: var(--light);
+    color: var(--dark);
+}

@@ -7,6 +7,17 @@
     margin: 0 auto;
 }
 
+.form-line {
+    display: flex;
+    gap: 1em;
+    margin: 10px 0;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+}
+
 .form label {
     text-align: left;
 }
@@ -40,7 +51,7 @@
 }
 
 .form select {
-    height: 45px;
+    height: 35px;
 }
 
 .form-line {
