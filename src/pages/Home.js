@@ -10,7 +10,11 @@ import styles from './styles/Home.module.css';
 
 export default function Home() {
   const { user } = useAuthContext();
-  const { documents, error } = useCollection("hours");
+  const { documents, error } = useCollection(
+    "hours",
+    ["uid", "==", user.uid],
+    ["createdAt", "desc"]
+    );
 
   return (
     <main>
