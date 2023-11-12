@@ -2,7 +2,9 @@
 import { useReducer, useEffect, useState } from "react";
 // database
 import { projectFirestore, timestamp } from "../firebase/config";
+// utils
 import { validateHoursForm } from "../utils/validateHoursForm";
+import { calculate_actual_total } from "../utils/calculateHours";
 
 let initialState = {
     isPending: false,
@@ -42,9 +44,10 @@ export const useFirestore = (collection) => {
     const addDocument = async (form, doc) => {
         dispatch({ type: 'IS_PENDING' });
         try {
-            await validateHoursForm(form);
+            const absDiff = await validateHoursForm(form);
+            const total = calculate_actual_total(absDiff);
             const createdAt = timestamp.fromDate(new Date());
-            const addedDocument = await ref.add({...doc, createdAt});
+            const addedDocument = await ref.add({...doc, total, createdAt});
             dispatchIfNotCancelled({ type: 'ADDED_DOC', payload: addedDocument });
         } catch (err) {
             console.log(err);

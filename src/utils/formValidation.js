@@ -20,5 +20,7 @@ export function validate_in_out_time(In, Out) {
     
     if (absDiff < 0) {
         throw ("Time out time should be after Time in.")
+    } else {
+        return absDiff
     }
 }

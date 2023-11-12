@@ -1,40 +1,28 @@
 // context
 import { useAuthContext } from '../hooks/useAuthContext';
+import { useCollection } from '../hooks/useCollection';
 // components
 import HoursForm from '../components/HoursForm';
+import ResultTable from '../components/ResultTable';
 // style
 import styles from './styles/Home.module.css';
 
+
 export default function Home() {
   const { user } = useAuthContext();
+  const { documents, error } = useCollection("hours");
 
   return (
     <main>
 
       <section id="top-section" className={styles["top-section"]}>
         <HoursForm uid={user.uid} />
-
-        <div className={styles["big-screen"]}>
-          <div className={styles["download-section"]}>
-            <h2>Download</h2>
-          </div>
-        </div>
-
+        {error && <p>{error}</p>}
       </section>
 
       <section id="result-section" className={styles["result-section"]}>
-        <div>
-          <h2>Result</h2>
-          
-        </div>
+        {documents && <ResultTable data={documents} />}
       </section>
-
-      <section className={styles["download-section"]}>
-        <div className={styles["small-screen"]}>
-          <h2>Download small</h2>
-        </div>
-      </section>
-
 
     </main>
   )
