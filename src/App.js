@@ -51,7 +51,7 @@ function App() {
             <Modal handleClose={handleClose} showModal={showModal} >
               <h2>Logout</h2>
               <p>Do you want to sign out?</p>
-              <button onClick={handleLogout} className={styles.btn} data="1">Confirm</button>
+              <button onClick={handleLogout} className={styles.btn}>Confirm</button>
             </Modal>
           )}
         </>

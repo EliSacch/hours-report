@@ -1,27 +1,46 @@
 // hooks
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useFirestore } from "../hooks/useFirestore";
 // style
 import formStyles from '../pages/styles/Forms.module.css';
 import btnStyles from '../pages/styles/Buttons.module.css';
 
-export default function HoursForm() {
+export default function HoursForm({ uid }) {
     const currentDate = new Date();
     const today = currentDate.toISOString().split('T')[0]
 
     const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
     const [date, setDate] = useState(today);
     const [timeIn, setTimeIn] = useState(`${currentDate.getHours()}:00`);
     const [timeOut, setTimeOut] = useState(`${currentDate.getHours() + 1}:00`);
+    const [error, setError] = useState(null);
+    const { addDocument, response } = useFirestore('hours');
 
     const handleSubmit = e => {
         e.preventDefault();
-        console.log({
+        addDocument(e.target, {
+            uid,
             name,
+            description,
             date,
             timeIn,
             timeOut
         })
     }
+
+    useEffect(() => {
+        if (response.success) {
+            alert("added");
+        }
+    }, [response.success])
+
+    useEffect(() => {
+        setError(null);
+        if (response.error) {
+            setError(response.error)
+        }
+    }, [response.error])
 
     return (
         <div>
@@ -29,7 +48,7 @@ export default function HoursForm() {
             <form onSubmit={handleSubmit} className={formStyles.form}>
                 <div className={formStyles["form-line"]}>
                     <div className={formStyles["form-input"]}>
-                        <label htmlFor="name">Student Name:</label>
+                        <label htmlFor="name">Name: *</label>
                         <input
                             id="name"
                             type="text"
@@ -41,8 +60,8 @@ export default function HoursForm() {
                 </div>
 
                 <div className={formStyles["form-line"]}>
-                <div className={formStyles["form-input"]}>
-                        <label htmlFor="date">Date:</label>
+                    <div className={formStyles["form-input"]}>
+                        <label htmlFor="date">Date: *</label>
                         <input
                             id="date"
                             type="date"
@@ -51,11 +70,21 @@ export default function HoursForm() {
                             value={date}
                         />
                     </div>
+                    <div className={formStyles["form-input"]}>
+                        <label htmlFor="description">Description:</label>
+                        <input
+                            id="description"
+                            type="text"
+                            name="description"
+                            onChange={(e) => setDescription(e.target.value)}
+                            value={description}
+                        />
+                    </div>
                 </div>
 
                 <div className={formStyles["form-line"]}>
                     <div className={formStyles["form-input"]}>
-                        <label htmlFor="time-in">Time In:</label>
+                        <label htmlFor="time-in">Time In: *</label>
                         <input
                             id="time-in"
                             type="time"
@@ -65,7 +94,7 @@ export default function HoursForm() {
                         />
                     </div>
                     <div className={formStyles["form-input"]}>
-                        <label htmlFor="time-out">Time out:</label>
+                        <label htmlFor="time-out">Time out: *</label>
                         <input
                             id="time-out"
                             type="time"
@@ -75,8 +104,13 @@ export default function HoursForm() {
                         />
                     </div>
                 </div>
+                <span>* Required</span>
 
                 <button id="add" className={btnStyles.btn} tabIndex={0}>Add</button>
+
+                {error && (
+                    <p>{error}</p>
+                )}
 
             </form>
         </div>

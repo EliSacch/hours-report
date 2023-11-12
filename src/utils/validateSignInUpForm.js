@@ -1,16 +1,5 @@
-function validate_required_fields(fields) {
-    for (let field of fields) {
-        if (field.value === "") {
-            throw new Error(`Field "${field.id}" is required`);
-        }
-    }
-}
+import { validate_passwords_match, validate_required_fields } from "./formValidation";
 
-function validate_passwords_match(pws1, psw2) {
-    if (pws1 !== psw2) {
-        throw new Error("Passwords don't match");
-    }
-}
 
 export const validateSignInUpForm = async form => {
     try {
@@ -27,4 +16,3 @@ export const validateSignInUpForm = async form => {
         throw new Error(err)
     }
 }
-
