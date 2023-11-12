@@ -12,6 +12,7 @@
 
 }
 
+.logo a,
 .links a,
 .links button {
     margin: 0 5px;
@@ -27,6 +28,7 @@
     font-size: 1em;
 }
 
+.logo a:hover,
 .links a:hover,
 .links button:hover {
     color: var(--light);

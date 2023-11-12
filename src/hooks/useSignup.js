@@ -1,14 +1,16 @@
 // hooks
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 // context
 import { useAuthContext } from './useAuthContext';
 // utils
-import { validateSignupForm } from '../utils/validateSignup';
+import { validateSignInUpForm } from '../utils/validateSignInUpForm';
 // components
 import { projectAuth } from '../firebase/config';
 
 
 export const useSignup = () => {
+
+    const [isCancelled, setIsCancelled] = useState(false);
     const [error, setError] = useState(null);
     const [isPending, setIsPending] = useState(false);
     const { dispatch } = useAuthContext();
@@ -17,27 +19,37 @@ export const useSignup = () => {
         setError(null);
         setIsPending(true);
         try {
-            // validate form
-            validateSignupForm(form);
-            // sign user up
+            
+            await validateSignInUpForm(form);
+            // try signin the user out
             const res = await projectAuth.createUserWithEmailAndPassword(email, password);
-            // if there is an error saving the data we manually throw an error
-            if (!res) {
-                throw new Error('We could not sign you up!');
-            }
-            // add display name
+            // manually throw wrror if ther eis no response
+            if(!res) {
+                throw new Error('There was an issue signing you up! Please, try again.')
+            };
+            // set the display name
             await res.user.updateProfile({ displayName });
+            // dispatch logout
+            dispatch({ type: 'LOGIN' , payload: res.user });
 
-            // dispatch login action
-            dispatch({ type: 'LOGIN', payload: res.user })
-
-            setIsPending(false);
+            if (!isCancelled) {
+                setIsPending(false);
+                setError(null);
+            }
 
         } catch (err) {
-            setError(err.message);
-            setIsPending(false);
+            if (!isCancelled) {
+                setError(err.message);
+                setIsPending(false);
+            }
         }
     }
+
+    // cleanup function
+    useEffect(() => {
+        setIsCancelled(false);
+        return () => setIsCancelled(true);
+    }, [])
 
     return { signup, isPending, error }
 }

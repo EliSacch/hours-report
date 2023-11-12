@@ -27,6 +27,7 @@ export default function Signup() {
         <input
           id="displayName"
           type="text"
+          name="displayName"
           onChange={(e) => setDisplayName(e.target.value)}
           value={displayName}
         />
@@ -37,6 +38,7 @@ export default function Signup() {
         <input
           id="email"
           type="email"
+          name="email"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
         />
@@ -47,6 +49,7 @@ export default function Signup() {
         <input
           id="password"
           type="password"
+          name="password"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
         />
@@ -57,6 +60,7 @@ export default function Signup() {
         <input
           id="password2"
           type="password"
+          name="password2"
           onChange={(e) => setPassword2(e.target.value)}
           value={password2}
         />
