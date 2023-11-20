@@ -1,3 +1,5 @@
+// hooks
+import { useEffect, useState } from 'react';
 // context
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useCollection } from '../hooks/useCollection';
@@ -6,6 +8,8 @@ import HoursForm from '../components/HoursForm';
 import ResultTable from '../components/ResultTable';
 // style
 import styles from './styles/Home.module.css';
+import Filters from '../components/Filters';
+
 
 
 export default function Home() {
@@ -16,6 +20,12 @@ export default function Home() {
     ["createdAt", "desc"]
     );
 
+  const [filteredData, setFilteredData] = useState(documents);
+ 
+  useEffect(() => {
+    setFilteredData(documents);
+  }, [documents])
+
   return (
     <main>
 
@@ -25,7 +35,8 @@ export default function Home() {
       </section>
 
       <section id="result-section" className={styles["result-section"]}>
-        {documents && <ResultTable data={documents} />}
+        {filteredData && <Filters data={documents} setFilteredData={setFilteredData} />}
+        {filteredData && <ResultTable data={filteredData} />}
       </section>
 
     </main>
