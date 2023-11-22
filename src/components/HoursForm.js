@@ -57,19 +57,7 @@ export default function HoursForm({ uid }) {
                             value={name}
                         />
                     </div>
-                </div>
 
-                <div className={formStyles["form-line"]}>
-                    <div className={formStyles["form-input"]}>
-                        <label htmlFor="date">Date: *</label>
-                        <input
-                            id="date"
-                            type="date"
-                            name="date"
-                            onChange={(e) => setDate(e.target.value)}
-                            value={date}
-                        />
-                    </div>
                     <div className={formStyles["form-input"]}>
                         <label htmlFor="description">Description:</label>
                         <input
@@ -80,9 +68,23 @@ export default function HoursForm({ uid }) {
                             value={description}
                         />
                     </div>
+                    
                 </div>
 
                 <div className={formStyles["form-line"]}>
+                    
+                    <div className={formStyles["form-input"]}>
+                        <label htmlFor="date">Date: *</label>
+                        <input
+                            id="date"
+                            type="date"
+                            name="date"
+                            onChange={(e) => setDate(e.target.value)}
+                            value={date}
+                        />
+                    </div>
+
+                    <div>
                     <div className={formStyles["form-input"]}>
                         <label htmlFor="time-in">Time In: *</label>
                         <input
@@ -103,8 +105,8 @@ export default function HoursForm({ uid }) {
                             value={timeOut}
                         />
                     </div>
+                    </div>
                 </div>
-                <span>* Required</span>
 
                 <button id="add" className={btnStyles.btn} tabIndex={0}>Add</button>
 

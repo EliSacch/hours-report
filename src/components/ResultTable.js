@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useFirestore } from '../hooks/useFirestore';
 // utils
-import { calculated_total } from '../utils/calculateHours';
+import { calculated_partial } from '../utils/calculateHours';
 //styles
 import styles from './styles/ResultTable.module.css';
 
@@ -44,7 +44,7 @@ export default function ResultTable({ data, cutoffTime }) {
                                             <td>{doc.timeIn}</td>
                                             <td>{doc.timeOut}</td>
                                             <td>{doc.total}</td>
-                                            { cutoff!=0 && <td>{calculated_total(doc.total, cutoff)}</td>}
+                                            { cutoff!=0 && <td>{calculated_partial(doc.total, cutoff)}</td>}
                                             <td>
                                                 <button onClick={() => deleteDocument(doc.id)} className={styles["material-symbols-outlined"]}>
                                                     <span className="material-symbols-outlined">

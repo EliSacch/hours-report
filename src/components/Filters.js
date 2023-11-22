@@ -48,21 +48,27 @@ export default function Filters({ data, setFilteredData }) {
                 </div>
             </div>
 
-            <label htmlFor='start'>Start date:</label>
-            <input
-                type="date"
-                name="start"
-                value={startDate}
-                onChange={e => setStartDate(e.target.value)}
-            />
+            <div className={formStyles["form-line"]}>
+                <div className={formStyles["form-input"]}>
+                    <label htmlFor='start'>Start date:</label>
+                    <input
+                        type="date"
+                        name="start"
+                        value={startDate}
+                        onChange={e => setStartDate(e.target.value)}
+                    />
+                </div>
 
-            <label htmlFor='end'>End date:</label>
-            <input
-                type="date"
-                name="end"
-                value={endDate}
-                onChange={e => setEndDate(e.target.value)}
-            />
+                <div className={formStyles["form-input"]}>
+                    <label htmlFor='end'>End date:</label>
+                    <input
+                        type="date"
+                        name="end"
+                        value={endDate}
+                        onChange={e => setEndDate(e.target.value)}
+                    />
+                </div>
+            </div>
 
             <button className={buttonStyles.filterBtn}>Filter</button>
 

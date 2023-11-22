@@ -1,7 +1,8 @@
 .table-container {
     position: relative;
-    width: 100%;
-    max-width: 800px;
+    width: 99%;
+    max-width: 1000px;
+    max-height: 800px;
     margin: 0 auto;
     overflow-x: scroll;
 }
@@ -9,6 +10,7 @@
 .table-container > table {
     width: 100%;
     color: var(--light);
+    position: relative;
 }
 
 .table-container > table button {
@@ -29,6 +31,11 @@
     font-size: 1.5em;
     background-color: transparent;
     border-radius: 4px;
+}
+
+thead {
+    position:sticky;
+    top: 0;
 }
 
 .table-container th {

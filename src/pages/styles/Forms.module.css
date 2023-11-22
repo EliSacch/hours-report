@@ -1,17 +1,26 @@
 .form,
-.filtersForm{
+.filtersForm {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    width: 98%;
-    max-width: 500px;
     margin: 0 auto;
+}
+
+.filtersForm {
+    max-width: 350px;
+    margin-bottom: 20px;
 }
 
 .form-line {
     display: flex;
+    flex-wrap: wrap;
     gap: 1em;
     margin: 10px 0;
+}
+
+.form-line > div {
+    display: flex;
+    column-gap: 1em;
 }
 
 .form-input {
