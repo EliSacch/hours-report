@@ -1,6 +1,9 @@
 // hooks
 import { useState } from 'react';
 import { useFilterData } from '../hooks/useFilterData';
+// style
+import formStyles from '../pages/styles/Forms.module.css';
+import buttonStyles from '../pages/styles/Buttons.module.css';
 
 
 export default function Filters({ data, setFilteredData }) {
@@ -26,20 +29,24 @@ export default function Filters({ data, setFilteredData }) {
     }
 
     return (
-        <form onSubmit={handleFilter}>
-            <label htmlFor='name'>Filter by name:</label>
-            <select
-                name="name"
-                value={name}
-                onChange={e => setName(e.target.value)}
-            >
-                <option value={""} key={0}>ALL</option>
-                {
-                    names.map(
-                        name => <option value={name} key={name}>{name}</option>
-                    )
-                }
-            </select>
+        <form onSubmit={handleFilter} className={formStyles.filtersForm}>
+            <div className={formStyles["form-line"]}>
+                <div className={formStyles["form-input"]}>
+                    <label htmlFor='name'>Filter by name:</label>
+                    <select
+                        name="name"
+                        value={name}
+                        onChange={e => setName(e.target.value)}
+                    >
+                        <option value={""} key={0}>ALL</option>
+                        {
+                            names.map(
+                                name => <option value={name} key={name}>{name}</option>
+                            )
+                        }
+                    </select>
+                </div>
+            </div>
 
             <label htmlFor='start'>Start date:</label>
             <input
@@ -57,7 +64,7 @@ export default function Filters({ data, setFilteredData }) {
                 onChange={e => setEndDate(e.target.value)}
             />
 
-            <button>Filter</button>
+            <button className={buttonStyles.filterBtn}>Filter</button>
 
         </form>
     )

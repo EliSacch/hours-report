@@ -1,4 +1,5 @@
-.form {
+.form,
+.filtersForm{
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -18,12 +19,15 @@
     flex-direction: column;
 }
 
-.form label {
+.form label,
+.filtersForm label {
     text-align: left;
 }
 
 .form input,
-.form select {
+.form select,
+.filtersForm input,
+.filtersForm select {
     margin: 10px 0;
     padding: 10px 20px;
     font-size: 1em;
@@ -33,12 +37,22 @@
     border-radius: 4px;
 }
 
+.filtersForm input,
+.filtersForm select {
+    color: var(--dark);
+    background-color: var(--light);
+    border: 1px solid var(--medium);
+}
+
 .form input:focus,
-.form select:focus {
+.form select:focus,
+.filtersForm input:focus,
+.filtersForm select:focus {
     outline: 2px solid var(--medium);
 }
 
-.form input::-webkit-calendar-picker-indicator {
+.form input::-webkit-calendar-picker-indicator,
+.filtersForm input::-webkit-calendar-picker-indicator {
     cursor: pointer;
     border-radius: 4px;
     margin-right: 2px;
@@ -46,21 +60,19 @@
     filter: invert(0.8);
 }
 
+.filtersForm input::-webkit-calendar-picker-indicator {
+    filter: none;
+    opacity: 1;
+}
+
 .form input::-webkit-calendar-picker-indicator:hover {
     opacity: 1
 }
 
+.filtersForm input::-webkit-calendar-picker-indicator:hover {
+    opacity: .2;
+}
+
 .form select {
     height: 35px;
-}
-
-.form-line {
-    display: flex;
-    gap: 1em;
-    margin: 10px 0;
-}
-
-.form-input {
-    display: flex;
-    flex-direction: column;
 }
