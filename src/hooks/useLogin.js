@@ -19,7 +19,7 @@ export const useLogin = () => {
         setIsPending(true);
         try {
             // validate form
-            validateSignInUpForm(form);
+            await validateSignInUpForm(form);
             // sign user in
             const res = await projectAuth.signInWithEmailAndPassword(email, password);
             // if there is an error saving the data we manually throw an error
@@ -32,11 +32,16 @@ export const useLogin = () => {
 
             if (!isCancelled) {
                 setIsPending(false);
+                setError(null);
             }
 
         } catch (err) {
             if (!isCancelled) {
-                setError(err.message);
+                if((err.message).includes("INVALID_LOGIN_CREDENTIALS")) {
+                    setError("Invalid credentials.");
+                } else {
+                    setError(err.message);
+                }
                 setIsPending(false);
             }
         }

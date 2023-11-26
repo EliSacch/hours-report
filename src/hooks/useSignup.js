@@ -19,7 +19,6 @@ export const useSignup = () => {
         setError(null);
         setIsPending(true);
         try {
-            
             await validateSignInUpForm(form);
             // try signin the user out
             const res = await projectAuth.createUserWithEmailAndPassword(email, password);

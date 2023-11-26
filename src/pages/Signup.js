@@ -1,21 +1,44 @@
 // hooks
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSignup } from '../hooks/useSignup';
+import { useMessage } from '../hooks/useMessage';
+// componenets
+import Message from '../components/Message';
 // style
 import formStyles from './styles/Forms.module.css';
 import btnStyles from './styles/Buttons.module.css';
+
 
 export default function Signup() {
   const [displayName, setDisplayName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [password2, setPassword2] = useState('');
+  const [success, setSuccess] = useState(null);
   const { signup, isPending, error } = useSignup();
+  const { displayMessage, closeMessage, openMessage } = useMessage();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     signup(e.target, email, password, displayName);
   }
+
+  useEffect(() => {
+    if (success) {
+      setSuccess("Welcome!");
+      openMessage();
+    }
+  }, [success])
+
+  useEffect(() => {
+    if (error) {
+      openMessage();
+    }
+  }, [error])
+
+  useEffect(() => {
+    closeMessage()
+  }, [])
 
   return (
     <form onSubmit={handleSubmit} className={formStyles.form}>
@@ -67,7 +90,11 @@ export default function Signup() {
       </div>
       {!isPending && <button id="signup" className={btnStyles.btn}>Signup</button>}
       {isPending && <button className={btnStyles.btn} disabled>loading...</button>}
-      {error && <p>{error}</p>}
+      {displayMessage && (
+        <Message displayMessage={displayMessage} closeMessage={closeMessage} type={error ? "error" : "success"}>
+          <p>{error ? error : success}</p>
+        </Message>
+      )}
 
     </form>
   )
