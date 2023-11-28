@@ -13,6 +13,8 @@ export default function Cutoff({ cutoffTime, setCutoffTime }) {
         acceptedValues.push(String(i));
     }
 
+    const storedCutoff = localStorage.getItem("cutoff");
+
     const handleCutoff = e => {
         e.preventDefault();
         setError(null);
@@ -20,12 +22,16 @@ export default function Cutoff({ cutoffTime, setCutoffTime }) {
 
         if (acceptedValues.includes(mins) || mins == "") {
             setCutoffTime(e.target.value);
+            localStorage.setItem("cutoff", e.target.value);
         } else {
             setError("*Please, enter a whole number between 0 and 59")
         }
     }
 
     useEffect(() => {
+        if(storedCutoff) {
+            setCutoffTime(storedCutoff);
+        }
         setError(null);
         setHasLoaded(true)
         return setError(null);
